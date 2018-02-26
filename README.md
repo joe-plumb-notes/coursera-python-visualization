@@ -13,6 +13,7 @@
 	4. Insightful : Shouldn't replicate data in tables, but deliver data to the 'aha' moment. 
 	5. Enlightening : composed of the previous four, adding social responsibility dimension. 
 
+## Week Two
 Matplotlib - we'll get hands on with the visualisation library.
 ### Architecture
 - Ipython has some special support for matplotlib, which can be enabled using '%matplotlib notebook'.
@@ -26,6 +27,9 @@ Matplotlib - we'll get hands on with the visualisation library.
    Simplify and speed up interaction, by doing magic for us. Makes us effective with mpl. We use pyplot in this course. Coreagraphs the two other layers.
 Pyplot in matplotlib is a procedural method for building a visualization (we tell what actions we want to take to order our data). There are also declarative forms, e.g. d3.js, HTML.
 
+Links:
+- [matplotlib architecture explained] (http://www.aosabook.org/en/matplotlib.html)
+- [10 rules for better figures] (http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833)
 
 
 
