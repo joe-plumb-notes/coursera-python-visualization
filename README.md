@@ -28,8 +28,8 @@ Matplotlib - we'll get hands on with the visualisation library.
 Pyplot in matplotlib is a procedural method for building a visualization (we tell what actions we want to take to order our data). There are also declarative forms, e.g. d3.js, HTML.
 
 Links:
-- [matplotlib architecture explained] (http://www.aosabook.org/en/matplotlib.html)
-- [10 rules for better figures] (http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833)
+- [matplotlib architecture explained](http://www.aosabook.org/en/matplotlib.html)
+- [10 rules for better figures](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833)
 
 
 
