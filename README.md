@@ -31,8 +31,30 @@ Links:
 - [matplotlib architecture explained](http://www.aosabook.org/en/matplotlib.html)
 - [10 rules for better figures](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833)
 
+_There's an xkcd library for matplotlib!_
 
+### Basic plotting
+- pyplot module is part of the scripting architecture.
+- Passing in `(x, y)` pairs to begin, first one does not show as it defaults to a line chart and there is no second point to draw a line to. Passing in `(x, y, '.')` tells how to render the data point.
+- Subsequent calls to `plt` updates the visualization, which is a particular feature of the interactive back-end used here.
+- pyplot scripting interface manages a lot of objects for you, keeps track of the latest figure, sub-plots, and axis objects, and hides some if this behind methods of its own.
+- more verbose approach is to interact with the mpl object API (like interacting with the artist layer directly)
+- define a new plot, plot a point
+```
+# create a new figure
+plt.figure()
 
- 
+# plot the point (3,2) using the circle marker
+plt.plot(3, 2, 'o')
+```
+- get plot axis, and define point on axis
+```
+# get the current axes
+ax = plt.gca()
 
+# Set axis properties [xmin, xmax, ymin, ymax]
+ax.axis([0,6,0,10])
+```
+- Other example code and bits and bobs available in the notebook.
 
+### Scatterplots
