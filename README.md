@@ -58,3 +58,38 @@ ax.axis([0,6,0,10])
 - Other example code and bits and bobs available in the notebook.
 
 ### Scatterplots
+Few things to remember:
+- `gcf` gets the current figure and assigns to a variable, `gca` gets the current axis (we saw this above)
+- pyplot does keep track of the axis object for us, but we can get to them and change them when/if we need.
+- pyplot mirrors the API of the axis objects, i.e. pyplot.plot is calling the axis plot functions underneath.
+- Function declaration for most functions in mpl end with an open set of kw arguments, which control a lot of different things. 
+- separation of data points into lists is common.
+- each data point is _not_ a separate instance of an object, so list comprehensions, zip, lambdas, and list unpacking are all useful.
+- _zip takes a number of iterables, and creates tuples out of them, matching elements on index._ zip's lazy evaluation (because it's a generator) means we need to use the list function if we want to see the results of iterating over a zip.
+- must be happy converting data to and from list / tuple form.
+```
+zip_generator = zip([1,2,3,4,5], [6,7,8,9,10])
+
+print(list(zip_generator))
+# the above prints:
+# [(1, 6), (2, 7), (3, 8), (4, 9), (5, 10)]
+```
+#### Axes
+- generally labelled. 
+- we can make calls direction on pyplot to change/add labels, e.g. `plt.xlabel('Label for x-axis')`, `plt.title('Title')`
+- `plt.legend()`, `frameon=False` will remove the frame, `title` will set legend title.
+` plt.legend(loc=4, frameon=False, title='Legend')`
+
+### Line plots
+- Again, created with the `plt.plot()` function, and plots a number of different series of data points, connecting these with a line. Broadcasting in np to create data more effeciently.
+```
+import numpy as np
+
+linear_data = np.array([1,2,3,4,5,6,7,8])
+exponential_data = linear_data**2
+
+plt.figure()
+# plot the linear data and the exponential data
+plt.plot(linear_data, '-o', exponential_data, '-o')
+```
+- 
