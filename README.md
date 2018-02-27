@@ -118,6 +118,13 @@ for item in x.get_ticklabels():
 ax.set_title("Exponential ($x^2$) vs. Linear ($x$) performance")
 ```
 ### Bar Charts
+- Plotting bar charts requires the x component (i.e. where it sits on the x axis), and the height of the bar. We can also pass the width.
+```
+xvals = range(len(linear_data))
+plt.bar(xvals, linear_data, width = 0.3)
+```
+- Lots of different types of bars, can add error bars, have stacked or horizontal bars .. 
+### De-junkifying a plot
 
-    
+
 
