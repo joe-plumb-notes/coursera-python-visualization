@@ -92,4 +92,32 @@ plt.figure()
 # plot the linear data and the exponential data
 plt.plot(linear_data, '-o', exponential_data, '-o')
 ```
-- 
+- `'-o'` gives dots, `'-s'` gives squares
+- When plotting lines, we only give y-axes values, as the plot fucntion figures we want to use the index of the series as the x value. The plot also identifies the two series of data, and colours them differently (dots and lines). This is different from the scatter, where we had to define each point separately.
+- Can `fill_between` objects in the visualisation. Typically seen in line chats, but can be used elsewhere too.
+#### Time Series
+- Often, will be looking to plot time series, i.e. datetime on the x axis.
+- can use np.arange to build datetime array, however it is in a different format (np) than the standard py datetime. Can use map and pandas to convert from one to the other 
+```
+import pandas as pd
+
+plt.figure()
+observation_dates = np.arange('2018-01-01', '2018-01-09', dtype='datetime64[D]')
+observation_dates = list(map(pd.to_datetime, observation_dates))
+plt.plot(observation_dates, linear_data, '-o',
+	 observation_dates, exponential_data, '-o')
+```
+- NB: wrapping the map function in list(), as mpl cannot read the iterator map() returns. This is a simple workaround, but not a very memory efficient way of handling the data. See [difference between iterator and a list](https://stackoverflow.com/questions/25653996/what-is-the-difference-between-list-and-iterator-in-python). This works in matplotlib 2.0.0, , but not 2.1.0.. I got around this by using the `plt.plot_date()` function.
+- The dates overlap when the above is rendered, so could think about removing the year (as all dates are in the same year) and adding this in the chart axis title.
+- Can rotate labels to make them readable, and add LaTex in the text to have more control (put between $'s)
+```
+# rotate the tick labels for the x axis
+for item in x.get_ticklabels():
+    item.set_rotation(45)
+
+ax.set_title("Exponential ($x^2$) vs. Linear ($x$) performance")
+```
+### Bar Charts
+
+    
+
