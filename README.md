@@ -125,6 +125,63 @@ plt.bar(xvals, linear_data, width = 0.3)
 ```
 - Lots of different types of bars, can add error bars, have stacked or horizontal bars .. 
 ### De-junkifying a plot
+#### 1.
+```#TODO: remove all the ticks (both axes), and tick labels on the Y axis
+plt.tick_params(axis='y', which='both', bottom='off', top='off', labelbottom='off')
+plt.yticks([])
+```
+Solution given:
+`plt.tick_params(top='off', bottom='off', left='off', right='off', labelleft='off', labelbottom='on')` - good that you can change ticks for both sides using this function.
+
+#### 2.
+```
+# TODO: remove the frame of the chart
+ax = plt.gca()
+ax.set_frame_on(False)
+```
+Used [this](https://shocksolution.com/2011/08/17/removing-an-axis-or-both-axes-from-a-matplotlib-plot/)
+Solution given:
+```
+# remove the frame of the chart
+for spine in plt.gca().spines.values():
+    spine.set_visible(False)
+```
+I guess this is better because it's directly calling the spine elements in the ax object
+
+#### 3.
+```
+# TODO: make one bar, the python bar, a contrasting color
+plt.bar(pos, popularity, align='center', color=['#639fff', '#d6e5fc', '#d6e5fc', '#d6e5fc', '#d6e5fc'])
+# TODO: soften all labels by turning grey
+plt.ylabel('% Popularity').set_color('grey')
+[i.set_color('grey') for i in plt.gca().get_xticklabels()]
+```
+Solution given:
+```
+# change the bar colors to be less bright blue
+bars = plt.bar(pos, popularity, align='center', linewidth=0, color='lightslategrey')
+# make one bar, the python bar, a contrasting color
+bars[0].set_color('#1F77B4')
+
+# soften all labels by turning grey
+plt.xticks(pos, languages, alpha=0.8)
+plt.ylabel('% Popularity', alpha=0.8)
+plt.title('Top 5 Languages for Math & Data \nby % popularity on Stack Overflow', alpha=0.8)
+
+```
+So I did two-birds-one-stone approach for the bars .. don't know why separating these colour jobs is better.. also setting the label alpha did not change them grey imo.. they look the same.
+#### 4.
+```
+# TODO: direct label each bar with Y axis values
+for bar in bars:
+  plt.gca().text(bar.get_x() + bar.get_width() /2, # get current axes, write text, for each bar. get_x() is a function of the 							   # rectangle object, returning left coord of the rectangle, then add width/2
+                 bar.get_height() - 5,             # i.e. center it. plt.text(x, y, text), essentially
+                 str(int(bar.get_height())) + '%', 
+                 ha='center', color='w', fontsize='12')
+```
+This is the solution given - I tried a few ways using [this](https://matplotlib.org/examples/api/barchart_demo.html) but couldn't get it, so looked to understand how the ax.text part works. I think the example is slightly confusing as well because it uses the `fig, ax = plt.subplots()` approach which breaks the existing vis, but is clearly not necessary as we can call the current axes info using `plt.gca()`, as in the above answer.
+
+### Week 3
 
 
 
