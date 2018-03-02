@@ -181,6 +181,10 @@ for bar in bars:
 ```
 This is the solution given - I tried a few ways using [this](https://matplotlib.org/examples/api/barchart_demo.html) but couldn't get it, so looked to understand how the ax.text part works. I think the example is slightly confusing as well because it uses the `fig, ax = plt.subplots()` approach which breaks the existing vis, but is clearly not necessary as we can call the current axes info using `plt.gca()`, as in the above answer.
 
+### Assignment 2
+I created this chart showing highest and lowest recorded temperatures, and then outliers in the following year:
+![Data Visualization](./img/weathervis_final.png)
+
 ## Week 3
 ### Subplots
 - Multiple plots in the same figure. 
