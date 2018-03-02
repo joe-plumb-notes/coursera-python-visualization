@@ -181,7 +181,35 @@ for bar in bars:
 ```
 This is the solution given - I tried a few ways using [this](https://matplotlib.org/examples/api/barchart_demo.html) but couldn't get it, so looked to understand how the ax.text part works. I think the example is slightly confusing as well because it uses the `fig, ax = plt.subplots()` approach which breaks the existing vis, but is clearly not necessary as we can call the current axes info using `plt.gca()`, as in the above answer.
 
-### Week 3
-
-
+## Week 3
+### Subplots
+- Multiple plots in the same figure. 
+```
+plt.figure() # Still required
+plt.subplot([number of rows], [number of columns], [plot number i.e. set current axis])
+```
+- A conceptual grid os overlayed on the figure, and subplot allows different axis to be created in different portions.
+- Plot to the subplot by calling plt.plot()
+- call subplot again with different last parameter to change current plot.
+- Run the risk of misleading the reader by having differing x,y axis in subplots - these can be shared using sharey/sharex when you set the second subplot as the current axis
+```
+ax1 = plt.subplot(1,2,1)
+plt.plot(linear_data, '-o')
+ax2 = plt.subplot(1,2,2, sharey=ax1)
+plt.plot(exponential_data, '-x')
+```
+- mpl plots start at 1, not 0, so be aware if iterating through a matrix/list to create subplots, start at 1.
+- can create a grid of subplots easily:
+```
+fig, ((ax1,ax2,ax3), (ax4,ax5,ax6), (ax7,ax8,ax9)) = plt.subplots(3, 3, sharex=True, sharey=True) # Note subplotS
+ax5.plot(linear_data, '-')
+```
+- This approach turns off x and y labels apart from subplots that boarder these edges. Turning the labels back on by iterating through the axis objects. Do this by iterating through the axes labels you have, or iterating through all in the figure:
+```
+for ax in plt.gcf.get_axes():
+	for label in ax.get_xticklabels() + ax.get_yticklabels():
+		label.set_visible(True)
+```
+- Interactive notebook backend doesn't always redraw, this can be forced using `plt.gcf().canvas.draw()`
+### Histograms
 
