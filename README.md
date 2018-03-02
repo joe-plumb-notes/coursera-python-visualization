@@ -183,7 +183,7 @@ This is the solution given - I tried a few ways using [this](https://matplotlib.
 
 ### Assignment 2
 I created this chart showing highest and lowest recorded temperatures, and then outliers in the following year:
-![Data Visualization](./img/weathervis_final.png)
+![Data Visualization](/img/weathervis_final.PNG)
 
 ## Week 3
 ### Subplots
