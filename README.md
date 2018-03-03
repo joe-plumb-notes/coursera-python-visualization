@@ -214,6 +214,61 @@ for ax in plt.gcf.get_axes():
 	for label in ax.get_xticklabels() + ax.get_yticklabels():
 		label.set_visible(True)
 ```
-- Interactive notebook backend doesn't always redraw, this can be forced using `plt.gcf().canvas.draw()`
-### Histograms
+- Interactive notebook backend doesn't always re-draw, this can be forced using `plt.gcf().canvas.draw()`
 
+### Histograms
+- A bar chart which shows frequency of a given phenomena, e.g. probability distributions (random, uniform, normal, chi squared)
+- Probability functions can be visualised as a curve (y axis (limited between 0 and 1) holds the probability a given value would occur, and x value is the value itself). This is called a _probability density_ function. X axis values are labeled in terms of the distribution function - in normal distribtuion, this is usually in terms of standard deviations. _A histogram is just a bar chart where the x-axis is a given observation and the y-axis is the frequency with which that observation occurs._ We can plot a probability distibution by sampling from it.
+- Sampling : picking a number from the distribution. More sampling, clearer representation of the distribution.
+- Can sample using numpy and create good normal distributions. When doing this, mpl defaults to 10 bins for a histogram, can up this to get clearer visual representation of the distribution.
+```
+fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, sharex=True)
+axs = [ax1, ax2, ax3, ax4]
+
+for n in range(0, len(axs)):
+	sample_size = 10**(n+1)
+	sample = np.random.normal(loc=0.0, scale=1.0, size=sample_size)
+	axs[n].hist(sample, bins=100) # This is where we set the bins to be more than default
+	axs[n].set_title('n={}'.format(sample_size))
+```
+- How many bins should you use? Unclear. Binning aids decision making, as we get to see an aggregated view. Similar to using aggregate statistics like standard deviation, mean etc. 
+#### Gridspec
+- Allows you to map axes over multiple cells in a grid.
+e.g.
+```
+plt.figure()
+Y = np.random.normal(loc=0.0, scale=1.0, size=10000)
+X = np.random.random(size=10000)
+plt.scatter(X,Y)
+```
+This is very unclear and difficult to determine whether there is any distribution
+```
+import matplotlib.gridspec as gridspec
+
+plt.figure()
+# Set up grids and spaces for visualisations
+gspec = gridspec.Gridspec(3, 3)
+
+top_histogram = plt.subplot(gspec[0, 1:])
+side_histogram = plt.subplot(gspec[1:, 0])
+lower_right = plt.subplot(gspec[1:, 1:])
+# Plot data
+Y = np.random.normal(loc=0.0, scale=1.0, size=10000)
+X = np.random.random(size=10000)
+lower_right = scatter(X, Y)
+top_histogram.hist(X, bins=100)
+s = side_histogram.hist(Y, bins=100, orientation=horizontal)
+```
+Can clear visualisations from gridspec to prevent having to do all the work again
+```
+top_histogram.clear()
+top_histogram.hist(X, bins=100, normed=True)
+side_histogram.invert_xaxis() # Can also flip/rotate
+```
+Can hard-code the axis values too
+```
+for ax in [top_histogram, lower_right]:
+	ax.set_xlim(0,1)
+for ax in [side_histogram, lower_right]:
+	ax.set_ylim(-5, 5)
+```
