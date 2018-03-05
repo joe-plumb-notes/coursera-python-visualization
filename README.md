@@ -272,3 +272,22 @@ for ax in [top_histogram, lower_right]:
 for ax in [side_histogram, lower_right]:
 	ax.set_ylim(-5, 5)
 ```
+### Boxplots
+- Aggregate statistics of various samples concisely: median, min and max, and the iqr (inter quertile randge)
+- IRQ : first, second, third and fourth quartiles. NMeasure of variabilitiy of the data.
+- `whis = 'range'`, tells boxplot to set the whiskers to max and min values.
+- to plot multiple boxes, send each column in as a list
+` _ = plt.boxplot([ df['normal'], df['random'], df['gamma'] ], whis='range')`
+- can overlay an axis on top of another using a toolkit that typically ships with mpl, in the example `import mpl_toolkits.axes_grid1.inset_locator as mpl_il` is used.
+- Rendering a boxplot without the whis argument plots the whiskers half way between the IQR (top of box - bottom of box * 1.5). This is a way to detect outliers - points plotted beyond the whiskers are called flyers.
+- Confidence interval can also be plotted, most commonly by adding notches to the box to represent 95% confidence interval. 
+
+### Heatmaps
+- Visualising 3d data and take advantage of proximities. (Lat, Long, another measure)
+- Break down when there is no continuous relationship between dimensions, e.g. catagorical data. (People look for patterns where there are none.)
+- plot using `plt.hist2d(X,Y, bins=25)`
+- Colour bar for legend `plt.colorbar()`
+
+### Animation
+- 
+### Interactivity
