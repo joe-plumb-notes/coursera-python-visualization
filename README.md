@@ -281,6 +281,7 @@ for ax in [side_histogram, lower_right]:
 - can overlay an axis on top of another using a toolkit that typically ships with mpl, in the example `import mpl_toolkits.axes_grid1.inset_locator as mpl_il` is used.
 - Rendering a boxplot without the whis argument plots the whiskers half way between the IQR (top of box - bottom of box * 1.5). This is a way to detect outliers - points plotted beyond the whiskers are called flyers.
 - Confidence interval can also be plotted, most commonly by adding notches to the box to represent 95% confidence interval. 
+- Paper on (selecting the correct number of bins.)[http://users.stat.umn.edu/~gmeeden/papers/hist.pdf]
 
 ### Heatmaps
 - Visualising 3d data and take advantage of proximities. (Lat, Long, another measure)
@@ -289,5 +290,38 @@ for ax in [side_histogram, lower_right]:
 - Colour bar for legend `plt.colorbar()`
 
 ### Animation
-- 
+- mpl does have support for animation and interactivity. These heavily depend on support from the backend. nb backend does support some level of interactivity. 
+- the animation is created by calling FuncAnimation - the animation is built by iteratively calling a function you define: this function will either clear the axis and redraw the next frame, or return a list of objects that needs to be re-drawn.
+```
+import matplotlib.animation as animation
+
+n = 100
+x = np.random.randn(n)
+```
+```
+# create the function that will do the plotting, where curr is the current frame
+def update(curr):
+    # check if animation is at the last frame, and if so, stop the animation a
+    if curr == n: 
+        a.event_source.stop()
+    plt.cla()
+    bins = np.arange(-4, 4, 0.5)
+    plt.hist(x[:curr], bins=bins)
+    plt.axis([-4,4,0,30])
+    plt.gca().set_title('Sampling the Normal Distribution')
+    plt.gca().set_ylabel('Frequency')
+    plt.gca().set_xlabel('Value')
+    plt.annotate('n = {}'.format(curr), [3,27])
+```
+```
+fig = plt.figure()
+a = animation.FuncAnimation(fig, update, interval=100)
+```
+- can export these animated files using ffmpeg (can take some time to set up), but means you can export these from jupyter environment/
+
 ### Interactivity
+- Similar to animation, closer to the artist layer. Have to reference the canvas object of the current figure.
+- Canvas handles drawing events, and events (mouse move, button press etc) are core component of CS.
+- connect event definition to event listener. 
+`plt.gcf().canvas.mpl_connect('button_press_event', onclick)`
+- pick event is the most important for us, allows you to present additional information when data is clicked on.
