@@ -325,3 +325,33 @@ a = animation.FuncAnimation(fig, update, interval=100)
 - connect event definition to event listener. 
 `plt.gcf().canvas.mpl_connect('button_press_event', onclick)`
 - pick event is the most important for us, allows you to present additional information when data is clicked on.
+
+### Assignment 3
+I created this simple bar chart which displays a y value, and colours the bars depending on relative distance from the sample mean:
+![Data Visualization](/img/assignment3.png)
+
+## Week 4
+
+### Plotting with Pandas
+- Pandas uses pml under the hood, and proivdes functions to visualize data.
+- mpl has pre-defined styles we can use, to change the look of the plots. Changing this for mpl will change the charts for pandas too.
+- we can use `plt.style.available` to see the styles provided.
+- built-in pandas visualization helps with fast plotting of series and df to aid data exploration. 
+- `df.plot();` is a simple wrapper around `plt.plot`. Colours are different, because of the styles we used. `;` surpresses unwanted output in a notebook.
+- select which plot you want by passing it in the `kind` parameter.
+- can also use `df.plot.[kind]()`, e.g. `df.plot.scatter('A', 'B', c = 'B', s=df['B'], colormap='viridis')`
+```
+ax = df.plot.scatter('A', 'C', c='B', s=df['B'], colormap='viridis')
+ax.set_aspect('equal')
+```
+- setting aspect ratio to equal allows you to see the true relationship between the axes
+- can easily draw box plots `df.plot.box();`, histograms `df.plot.hist(alpha=0.7);`, and kernel density estimate plots `df.plot.kde();`, which are useful for visualizing an estimate of a varialbles probability density function. These are particularly useful when you want to derive a smooth continuous function from a given sample.
+- `pd.tools.plotting` are a set of built in tools that assist with visualizing large data sets or high dimensional data, e.g. scatter matrix, e.g. `pd.tools.plotting.scatter_matrix([df]);`
+- can manually build this - 4x4 subplot of histograms and scatters..
+- `parallel_coordinates` plots are a common way to visualise high dimensional / multi-variate data. 
+- each variable in the data set corresponds to an equally spaced parallel vertical line. The values of each variable are then connected by lines between for each individual observation. 
+
+### Seaborn
+- mpl wrapper, to make visuals more appealing, and makes complicated plots simpler to create.
+- `import seaborn as sns`
+- 
