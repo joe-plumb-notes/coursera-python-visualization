@@ -354,4 +354,9 @@ ax.set_aspect('equal')
 ### Seaborn
 - mpl wrapper, to make visuals more appealing, and makes complicated plots simpler to create.
 - `import seaborn as sns`
-- 
+ - _need to watch and make notes on the rest of this lecture - some nice visuals to note_
+
+### Assignment 4
+Here is a set of subplots I created investigating house prices across the UK
+![Data Visualization](/img/assignment4.png)
+I scored 100%! woo!
